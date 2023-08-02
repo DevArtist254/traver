@@ -55,6 +55,9 @@ app.use((req, res, next) => {
   next();
 });
 
+//Route management
+app.use('/natours/v1/tours', toursRoute)
+
 ////////////////////////////////////
 //Global error handler OPs
 app.all('*', (req, res, next) => {
