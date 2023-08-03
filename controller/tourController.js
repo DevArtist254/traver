@@ -7,9 +7,23 @@ exports.createATour = async (req, res, next) => {
 
     if (!doc) return new ErrorHandle(`There is no such tour`, 404);
 
-    res.status(200).json({
+    return res.status(200).json({
       message: 'success',
       doc,
+    });
+  } catch (error) {
+    return next(new ErrorHandle(`${error.message}`, 404));
+  }
+};
+
+exports.getAllTours = async (req, res, next) => {
+  try {
+    const doc = await Tour.find(req.params.tourId);
+
+    return res.status(200).json({
+      message: 'success',
+      results: doc.length,
+      data: {doc},
     });
   } catch (error) {
     return next(new ErrorHandle(`${error.message}`, 404));
